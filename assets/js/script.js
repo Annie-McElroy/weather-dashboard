@@ -1,9 +1,13 @@
 // variables for search button
-var searchFormEl = document.querySelector('#search-form')
-var searchBtn = document.querySelector("#search-button")
+var searchFormEl = document.querySelector('#search-form');
+var searchBtn = document.querySelector("#search-button");
+var savedCities = document.querySelector('#saved-list');
+var cityInput = document.querySelector('#city-input');
 
+
+var userSearch = [];
 // var for the key and api URL (with the lat and long )
-var APIKey = "dba807256a5277a928e9bb4daa57671f"
+var APIKey = "dba807256a5277a928e9bb4daa57671f";
 
 // "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}"
 
@@ -23,22 +27,42 @@ var APIKey = "dba807256a5277a928e9bb4daa57671f"
 function searchCity(event) {
     event.preventDefault();
     
-    var cityInputVal = document.querySelector('#city-input').value;
+    var cityInputVal = cityInput.value;
+    userSearch.push(cityInputVal);
     
     if (!cityInputVal) {
         var errorMsg = document.querySelector('#error-msg')
-        errorMsg.textContent = "You must enter a city name!"
+        errorMsg.textContent = "You must enter a city name!";
+
         return;
     }
     
-    localStorage.setItem("City", cityInputVal)
-    // console.log(cityInputVal)
+    localStorage.setItem("City", JSON.stringify(userSearch));
+    console.log(userSearch);
+    searchHistory()
     
 }
-
 // searchBtn 
 searchFormEl.addEventListener('submit', searchCity);
 
+// function for displaying history
+
+function searchHistory() {
+    var savedPlaces = JSON.parse(localStorage.getItem("City"));
+
+    if (savedPlaces !== null) {
+        userSearch = savedPlaces;
+    }
+
+    for (i = 0; i < savedPlaces.length; i++) {
+        var historyDisplay = savedPlaces[i];
+        var cityBtn = document.createElement("button");
+    }
+
+    cityBtn.textContent = historyDisplay;
+    cityBtn.setAttribute("data-index", i);
+    savedCities.appendChild(cityBtn);
+}
 
 // function that searches the city name within city name API URL
 
@@ -47,14 +71,14 @@ searchFormEl.addEventListener('submit', searchCity);
 // from cityURL we'll take the lat and long with variable for document.location.lat
 
 function appendCity() {
+    var city = cityInput.value
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
-    var city = localStorage.getItem("City", cityInputVal)
 
+    console.log(queryURL)
 }
 
-
-
+appendCity()
 
 
     // fetch function to get API

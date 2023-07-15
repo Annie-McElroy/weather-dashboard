@@ -46,6 +46,7 @@ function searchCity(event) {
     localStorage.setItem("City", JSON.stringify(userSearch));
     console.log(userSearch);
 
+    // Resets fields for each search
     day1.innerHTML = " ";
     day2.innerHTML = " ";
     day3.innerHTML = " ";
@@ -53,15 +54,15 @@ function searchCity(event) {
     day5.innerHTML = " ";
     currentCard.innerHTML = " ";
 
-    searchHistory(cityInputVal);
+    searchHistory();
     event.preventDefault();
 
 };
-// searchBtn 
+// search button event
 searchFormEl.addEventListener('submit', searchCity);
 
-// function for displaying history
 
+// function for displaying history
 function searchHistory() {
     var savedPlaces = JSON.parse(localStorage.getItem("City"));
     
@@ -223,6 +224,7 @@ function renderCurrentDate(timestamp, weatherIconData, tempData, windData, humid
     var weatherIcon = document.querySelector("#weather-emoji");
     weatherIcon.setAttribute("src", weatherIconData)
     var temp = document.createElement('li');
+    temp.setAttribute("class", "fs-4");
     var wind = document.createElement('li');
     var humidity = document.createElement('li');
 
@@ -230,9 +232,9 @@ function renderCurrentDate(timestamp, weatherIconData, tempData, windData, humid
     
     givenDate.textContent = "Today: " + date;
     // weatherIcon.textContent = weatherIconData;
-    temp.textContent = "Tempature: " + tempData + "F*";
-    wind.textContent = windData;
-    humidity.textContent = humidityData;
+    temp.textContent = "Temperature: " + Math.round(tempData)  + '\u00B0' +"F";
+    wind.textContent = "Wind Speeds: " + windData + " MPH";
+    humidity.textContent = "Humidity: " + humidityData + "%";
     
 }
 
@@ -253,11 +255,11 @@ function renderDay1(timestamp1, weatherIconData1, tempData1, windData1, humidity
     
     day1.append(temp, wind, humidity);
     
-    dayDate.textContent = date
+    dayDate.textContent = date;
     // weatherIcon.textContent = weatherIconData1;
-    temp.textContent = tempData1;
-    wind.textContent = windData1;
-    humidity.textContent = humidityData1;
+    temp.textContent = "Temperature: " + Math.round(tempData1) + '\u00B0' +"F";
+    wind.textContent = "Wind Speeds: " + windData1 + " MPH";
+    humidity.textContent = "Humidity: " + humidityData1 + "%";
 }
 
 
@@ -279,9 +281,9 @@ function renderDay2(timestamp2, weatherIconData2, tempData2, windData2, humidity
 
     dayDate.textContent = date
     // weatherIcon.textContent = weatherIconData2;
-    temp.textContent = tempData2;
-    wind.textContent = windData2;
-    humidity.textContent = humidityData2;
+    temp.textContent = "Temperature: " + Math.round(tempData2) + '\u00B0' +"F";
+    wind.textContent = "Wind Speeds: " + windData2 + " MPH";
+    humidity.textContent = "Humidity: " + humidityData2 + "%";
 }
 
 // Day 3 display data
@@ -302,9 +304,9 @@ function renderDay3(timestamp3, weatherIconData3, tempData3, windData3, humidity
 
     dayDate.textContent = date
     // weatherIcon.textContent = weatherIconData3;
-    temp.textContent = tempData3;
-    wind.textContent = windData3;
-    humidity.textContent = humidityData3;
+    temp.textContent = "Temperature: " + Math.round(tempData3) + '\u00B0' +"F";
+    wind.textContent = "Wind Speeds: " + windData3 + " MPH";
+    humidity.textContent = "Humidity: " + humidityData3 + "%";
 }
 
 // day 4 render data function
@@ -325,9 +327,9 @@ function renderDay4(timestamp4, weatherIconData4, tempData4, windData4, humidity
 
     dayDate.textContent = date
     // weatherIcon.textContent = weatherIconData4;
-    temp.textContent = tempData4;
-    wind.textContent = windData4;
-    humidity.textContent = humidityData4;
+    temp.textContent = "Temperature: " + Math.round(tempData4) + '\u00B0' +"F";
+    wind.textContent = "Wind Speeds: " + windData4 + " MPH";
+    humidity.textContent = "Humidity: " + humidityData4 + "%";
 }
 
 // day 5 render data function
@@ -348,8 +350,8 @@ function renderDay5(timestamp5, weatherIconData5, tempData5, windData5, humidity
 
     dayDate.textContent = date;
     // weatherIcon.textContent = weatherIconData5;
-    temp.textContent = tempData5;
-    wind.textContent = windData5;
-    humidity.textContent = humidityData5;
+    temp.textContent = "Temperature: " + Math.round(tempData5) + '\u00B0' +"F";
+    wind.textContent = "Wind Speeds: " + windData5 + " MPH";
+    humidity.textContent = "Humidity: " + humidityData5 + "%";
 
 };

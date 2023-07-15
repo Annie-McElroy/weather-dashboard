@@ -228,9 +228,9 @@ function renderCurrentDate(timestamp, weatherIconData, tempData, windData, humid
 
     currentCard.append(temp, wind, humidity);
     
-    givenDate.textContent = date;
+    givenDate.textContent = "Today: " + date;
     // weatherIcon.textContent = weatherIconData;
-    temp.textContent = tempData;
+    temp.textContent = "Tempature: " + tempData + "F*";
     wind.textContent = windData;
     humidity.textContent = humidityData;
     

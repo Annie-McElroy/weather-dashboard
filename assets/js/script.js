@@ -31,9 +31,35 @@ var APIKey = "dba807256a5277a928e9bb4daa57671f";
 
 // search button click event listener
 function searchCity(event) {
+    event.preventDefault();
     
     var cityInputVal = cityInput.value;
-    userSearch.push(cityInputVal);
+    var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInputVal + "&appid=" + APIKey;
+    appendCity(cityURL)
+    
+    if (userSearch.includes(cityInputVal)) {
+        return;
+    } else {
+        userSearch.push(cityInputVal);
+        var cityBtn = document.createElement("button");
+        cityBtn.textContent = cityInputVal;
+        // cityBtn.setAttribute("data-index", i);
+        savedCities.appendChild(cityBtn);
+        localStorage.setItem("City", JSON.stringify(userSearch));
+        cityInput.value = " ";
+        cityBtn.addEventListener("click", function() {
+            day1.innerHTML = " ";
+            day2.innerHTML = " ";
+            day3.innerHTML = " ";
+            day4.innerHTML = " ";
+            day5.innerHTML = " ";
+            currentCard.innerHTML = " ";
+            var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInputVal + "&appid=" + APIKey;           
+            console.log(cityURL)
+            appendCity(cityURL);
+        })
+        
+    }
     
     if (!cityInputVal) {
         var errorMsg = document.querySelector('#error-msg')
@@ -43,7 +69,6 @@ function searchCity(event) {
     }
     
     // function to save user search to local storage
-    localStorage.setItem("City", JSON.stringify(userSearch));
     console.log(userSearch);
 
     // Resets fields for each search
@@ -54,8 +79,7 @@ function searchCity(event) {
     day5.innerHTML = " ";
     currentCard.innerHTML = " ";
 
-    searchHistory();
-    event.preventDefault();
+    // searchHistory();
 
 };
 // search button event
@@ -63,44 +87,32 @@ searchFormEl.addEventListener('submit', searchCity);
 
 
 // function for displaying history
-function searchHistory() {
-    var savedPlaces = JSON.parse(localStorage.getItem("City"));
+// function searchHistory() {
+//     var savedPlaces = JSON.parse(localStorage.getItem("City"));
     
-    if (savedPlaces !== null) {
-        userSearch = savedPlaces;
-    }
+//     if (savedPlaces !== null) {
+//         userSearch = savedPlaces;
+//     }
     
-    for (i = 0; i < savedPlaces.length; i++) {
-        var historyDisplay = savedPlaces[i];
-        var cityBtn = document.createElement("button");
-    }
-    
-    cityBtn.textContent = historyDisplay;
-    cityBtn.setAttribute("data-index", i);
-    savedCities.appendChild(cityBtn);
-    
-    function clickHistory() {
-        searchFormEl.reset();
-        // city = historyDisplay
-        // console.log(city)
-        // appendCity(city)
-    }
-    cityBtn.addEventListener("click", clickHistory)
+//     for (i = 0; i < savedPlaces.length; i++) {
+//         var historyDisplay = savedPlaces[i];
+//         var cityBtn = document.createElement("button");
+//         cityBtn.textContent = historyDisplay;
+//         cityBtn.setAttribute("data-index", i);
+//         savedCities.appendChild(cityBtn);
+//     }
+// }
 
-    
-    appendCity()
-}
 
 
 
 
 // function that searches the city name within city name API URL
-function appendCity(city) {
+function appendCity(cityURL) {
     // user inputs city it goes into cityURL
-    city = document.querySelector('#city-input').value
-    var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;
-    
-    console.log(city)
+    // var city = 
+    // var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;
+
     console.log(cityURL)
     fetch (cityURL)
         .then(function (response){
@@ -151,7 +163,7 @@ function searchApi(lat, lon) {
             var windData = (data.daily[0].wind_speed);
             var humidityData = (data.daily[0].humidity)
             // console.log(timestamp)
-            console.log(weatherIconData);
+            // console.log(weatherIconData);
             // console.log(tempData);
             // console.log(windData);
             // console.log(humidityData);
@@ -164,7 +176,6 @@ function searchApi(lat, lon) {
             var tempData1 = (data.daily[1].temp.day);
             var windData1 = (data.daily[1].wind_speed);
             var humidityData1 = (data.daily[1].humidity)
-            console.log(weatherIconData1)
             
             renderDay1(timestamp1, weatherIconData1, tempData1, windData1, humidityData1)
 
@@ -215,7 +226,7 @@ function renderCurrentDate(timestamp, weatherIconData, tempData, windData, humid
     // current day
     var dateFormat = new Date(timestamp * 1000);
     var date = dateFormat.toLocaleDateString();
-    console.log(date);
+    // console.log(date);
 
     
     
@@ -232,7 +243,7 @@ function renderCurrentDate(timestamp, weatherIconData, tempData, windData, humid
     
     givenDate.textContent = "Today: " + date;
     // weatherIcon.textContent = weatherIconData;
-    temp.textContent = "Temperature: " + Math.round(tempData)  + '\u00B0' +"F";
+    temp.textContent = "Temperature: " + Math.round(tempData) + '\u00B0' +"F";
     wind.textContent = "Wind Speeds: " + windData + " MPH";
     humidity.textContent = "Humidity: " + humidityData + "%";
     
@@ -244,7 +255,7 @@ function renderDay1(timestamp1, weatherIconData1, tempData1, windData1, humidity
 
     var dateFormat = new Date(timestamp1 * 1000);
     var date = dateFormat.toLocaleDateString();
-    console.log(date);
+
 
     var dayDate = document.querySelector('#date-1')
     var weatherIcon = document.querySelector("#weather-emoji-1");
@@ -268,7 +279,6 @@ function renderDay2(timestamp2, weatherIconData2, tempData2, windData2, humidity
     
     var dateFormat = new Date(timestamp2 * 1000);
     var date = dateFormat.toLocaleDateString();
-    console.log(date);
 
     var dayDate = document.querySelector('#date-2')
     var weatherIcon = document.querySelector("#weather-emoji-2");
@@ -291,7 +301,6 @@ function renderDay3(timestamp3, weatherIconData3, tempData3, windData3, humidity
 
     var dateFormat = new Date(timestamp3 * 1000);
     var date = dateFormat.toLocaleDateString();
-    console.log(date);
 
     var dayDate = document.querySelector('#date-3')
     var weatherIcon = document.querySelector("#weather-emoji-3");
@@ -314,7 +323,6 @@ function renderDay4(timestamp4, weatherIconData4, tempData4, windData4, humidity
 
     var dateFormat = new Date(timestamp4 * 1000);
     var date = dateFormat.toLocaleDateString();
-    console.log(date);
 
     var dayDate = document.querySelector('#date-4')
     var weatherIcon = document.querySelector("#weather-emoji-4");
@@ -337,7 +345,6 @@ function renderDay5(timestamp5, weatherIconData5, tempData5, windData5, humidity
     
     var dateFormat = new Date(timestamp5 * 1000);
     var date = dateFormat.toLocaleDateString();
-    console.log(date);
 
     var dayDate = document.querySelector('#date-5');
     var weatherIcon = document.querySelector("#weather-emoji-5");

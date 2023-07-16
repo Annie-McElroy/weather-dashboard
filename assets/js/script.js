@@ -29,7 +29,7 @@ function searchCity(event) {
     // var for city to collect whatever user inputs
     var cityInputVal = cityInput.value.trim();
     // user inputs city it goes into cityURL
-    var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInputVal + "&appid=" + APIKey;
+    var cityURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInputVal + "&appid=" + APIKey;
     appendCity(cityURL)
     
     if (userSearch.includes(cityInputVal.trim())) {
@@ -56,7 +56,7 @@ function searchCity(event) {
             day4.innerHTML = " ";
             day5.innerHTML = " ";
             currentCard.innerHTML = " ";
-            var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInputVal + "&appid=" + APIKey;           
+            var cityURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInputVal + "&appid=" + APIKey;           
             console.log(cityURL)
             appendCity(cityURL);
         })
@@ -99,7 +99,7 @@ function displayHistory() {
             day4.innerHTML = " ";
             day5.innerHTML = " ";
             currentCard.innerHTML = " ";
-        var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + historyDisplay + "&appid=" + APIKey; 
+        var cityURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + historyDisplay + "&appid=" + APIKey; 
             appendCity(cityURL);
         })
     }

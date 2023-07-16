@@ -33,17 +33,23 @@ var APIKey = "dba807256a5277a928e9bb4daa57671f";
 function searchCity(event) {
     event.preventDefault();
     
-    var cityInputVal = cityInput.value;
+    var cityInputVal = cityInput.value.trim();
     var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInputVal + "&appid=" + APIKey;
     appendCity(cityURL)
     
-    if (userSearch.includes(cityInputVal)) {
+    if (userSearch.includes(cityInputVal.trim())) {
+        day1.innerHTML = " ";
+        day2.innerHTML = " ";
+        day3.innerHTML = " ";
+        day4.innerHTML = " ";
+        day5.innerHTML = " ";
+        currentCard.innerHTML = " ";
         return;
     } else {
-        userSearch.push(cityInputVal);
+        userSearch.push(cityInputVal.trim());
         var cityBtn = document.createElement("button");
         cityBtn.textContent = cityInputVal;
-        // cityBtn.setAttribute("data-index", i);
+        // cityBtn.setAttribute("class", "history");
         savedCities.appendChild(cityBtn);
         localStorage.setItem("City", JSON.stringify(userSearch));
         cityInput.value = " ";
@@ -72,12 +78,6 @@ function searchCity(event) {
     console.log(userSearch);
 
     // Resets fields for each search
-    day1.innerHTML = " ";
-    day2.innerHTML = " ";
-    day3.innerHTML = " ";
-    day4.innerHTML = " ";
-    day5.innerHTML = " ";
-    currentCard.innerHTML = " ";
 
     // searchHistory();
 
@@ -86,24 +86,31 @@ function searchCity(event) {
 searchFormEl.addEventListener('submit', searchCity);
 
 
-// function for displaying history
-// function searchHistory() {
-//     var savedPlaces = JSON.parse(localStorage.getItem("City"));
+// function for displaying history after refresh
+function displayHistory() {
+    var savedPlaces = JSON.parse(localStorage.getItem("City"));
     
-//     if (savedPlaces !== null) {
-//         userSearch = savedPlaces;
-//     }
+    if (savedPlaces != null) {
+        userSearch = savedPlaces;
+    }
     
-//     for (i = 0; i < savedPlaces.length; i++) {
-//         var historyDisplay = savedPlaces[i];
-//         var cityBtn = document.createElement("button");
-//         cityBtn.textContent = historyDisplay;
-//         cityBtn.setAttribute("data-index", i);
-//         savedCities.appendChild(cityBtn);
-//     }
-// }
-
-
+    for (i = 0; i < savedPlaces.length; i++) {
+        var historyDisplay = savedPlaces[i];
+        var cityBtn = document.createElement("button");
+        cityBtn.textContent = historyDisplay;
+        savedCities.appendChild(cityBtn);
+        cityBtn.addEventListener("click", function() {
+            day1.innerHTML = " ";
+            day2.innerHTML = " ";
+            day3.innerHTML = " ";
+            day4.innerHTML = " ";
+            day5.innerHTML = " ";
+            currentCard.innerHTML = " ";
+        var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + historyDisplay + "&appid=" + APIKey; 
+            appendCity(cityURL);
+        })
+    }
+}
 
 
 
@@ -362,3 +369,5 @@ function renderDay5(timestamp5, weatherIconData5, tempData5, windData5, humidity
     humidity.textContent = "Humidity: " + humidityData5 + "%";
 
 };
+
+displayHistory();

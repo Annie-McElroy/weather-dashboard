@@ -1,1 +1,45 @@
-# weather-dashboard
+# Weather Dashboard
+
+## Description
+
+Weather Dashboard will allow any user to search a city and display current day and the next 5 day weather forecast while also saving their search history to click on again and display the weather.
+
+## Usage
+
+Access website here at [Weather Dashboard](https://annie-mcelroy.github.io/weather-dashboard/) and follow the below instructions:
+- Type and search any city you wish and the weather will be displayed
+- The city will be saved as a button under your Saved Cities
+- Search up more cities or to see the weather for any of the Saved Cities by selecting their button. 
+
+![Weather Dashboard webpage](./assets/images/weather-dashboard.png)
+
+
+## Credits
+
+[OpenWeatherMap](https://openweathermap.org/) API used to display consistent weather data.
+
+## License
+
+MIT License
+
+Copyright (c) 2023 Annie McElroy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---

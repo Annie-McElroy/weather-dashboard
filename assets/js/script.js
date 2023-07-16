@@ -17,27 +17,23 @@ var userSearch = [];
 // var for the key
 var APIKey = "dba807256a5277a928e9bb4daa57671f";
 
-// "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}"
-
-// var for the city name api URL with parameters q (for the city variable) and appid (for the api key)
-// var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
-// Possible example: var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
 
 
-
-// var for city to collect whatever user inputs
 
 
 // search button click event listener
 function searchCity(event) {
     event.preventDefault();
     
+    // var for city to collect whatever user inputs
     var cityInputVal = cityInput.value.trim();
+    // user inputs city it goes into cityURL
     var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInputVal + "&appid=" + APIKey;
     appendCity(cityURL)
     
     if (userSearch.includes(cityInputVal.trim())) {
+        // Resets fields for each search
         day1.innerHTML = " ";
         day2.innerHTML = " ";
         day3.innerHTML = " ";
@@ -74,12 +70,9 @@ function searchCity(event) {
         return;
     }
     
-    // function to save user search to local storage
+
     console.log(userSearch);
 
-    // Resets fields for each search
-
-    // searchHistory();
 
 };
 // search button event
@@ -110,17 +103,12 @@ function displayHistory() {
             appendCity(cityURL);
         })
     }
-}
+};
 
 
 
 // function that searches the city name within city name API URL
 function appendCity(cityURL) {
-    // user inputs city it goes into cityURL
-    // var city = 
-    // var cityURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;
-
-    console.log(cityURL)
     fetch (cityURL)
         .then(function (response){
             if (!response.ok) {
@@ -139,7 +127,7 @@ function appendCity(cityURL) {
             console.log(lon);
             searchApi(lat, lon);
         });
-}
+};
 
 
 
@@ -168,12 +156,7 @@ function searchApi(lat, lon) {
             var weatherIconData = 'https://openweathermap.org/img/wn/' + (data.daily[0].weather[0].icon) + '@2x.png';
             var tempData = (data.daily[0].temp.day);
             var windData = (data.daily[0].wind_speed);
-            var humidityData = (data.daily[0].humidity)
-            // console.log(timestamp)
-            // console.log(weatherIconData);
-            // console.log(tempData);
-            // console.log(windData);
-            // console.log(humidityData);
+            var humidityData = (data.daily[0].humidity);
 
             renderCurrentDate(timestamp, weatherIconData, tempData, windData, humidityData);
 
@@ -191,7 +174,7 @@ function searchApi(lat, lon) {
             var weatherIconData2 = 'https://openweathermap.org/img/wn/' + (data.daily[2].weather[0].icon) + '@2x.png';
             var tempData2 = (data.daily[2].temp.day);
             var windData2 = (data.daily[2].wind_speed);
-            var humidityData2 = (data.daily[2].humidity)
+            var humidityData2 = (data.daily[2].humidity);
             
             renderDay2(timestamp2, weatherIconData2, tempData2, windData2, humidityData2)
 
@@ -200,7 +183,7 @@ function searchApi(lat, lon) {
             var timestamp3 = (data.daily[3].dt);
             var weatherIconData3 = 'https://openweathermap.org/img/wn/' + (data.daily[3].weather[0].icon) + '@2x.png';
             var tempData3 = (data.daily[3].temp.day);
-            var windData3 = (data.daily[3].wind_speed);
+            var windData3 = (data.daily[3].wind_speed);;
             var humidityData3 = (data.daily[3].humidity)
             
             renderDay3(timestamp3, weatherIconData3, tempData3, windData3, humidityData3);
@@ -210,7 +193,7 @@ function searchApi(lat, lon) {
             var weatherIconData4 = 'https://openweathermap.org/img/wn/' + (data.daily[4].weather[0].icon) + '@2x.png';
             var tempData4 = (data.daily[4].temp.day);
             var windData4 = (data.daily[4].wind_speed);
-            var humidityData4 = (data.daily[4].humidity)
+            var humidityData4 = (data.daily[4].humidity);
             
             renderDay4(timestamp4, weatherIconData4, tempData4, windData4, humidityData4);
 
@@ -219,7 +202,7 @@ function searchApi(lat, lon) {
             var weatherIconData5 = 'https://openweathermap.org/img/wn/' + (data.daily[5].weather[0].icon) + '@2x.png';
             var tempData5 = (data.daily[5].temp.day);
             var windData5 = (data.daily[5].wind_speed);
-            var humidityData5 = (data.daily[5].humidity)
+            var humidityData5 = (data.daily[5].humidity);
 
             
             renderDay5(timestamp5, weatherIconData5, tempData5, windData5, humidityData5);
@@ -233,7 +216,6 @@ function renderCurrentDate(timestamp, weatherIconData, tempData, windData, humid
     // current day
     var dateFormat = new Date(timestamp * 1000);
     var date = dateFormat.toLocaleDateString();
-    // console.log(date);
 
     
     
@@ -249,7 +231,6 @@ function renderCurrentDate(timestamp, weatherIconData, tempData, windData, humid
     currentCard.append(temp, wind, humidity);
     
     givenDate.textContent = "Today: " + date;
-    // weatherIcon.textContent = weatherIconData;
     temp.textContent = "Temperature: " + Math.round(tempData) + '\u00B0' +"F";
     wind.textContent = "Wind Speeds: " + windData + " MPH";
     humidity.textContent = "Humidity: " + humidityData + "%";
@@ -274,7 +255,6 @@ function renderDay1(timestamp1, weatherIconData1, tempData1, windData1, humidity
     day1.append(temp, wind, humidity);
     
     dayDate.textContent = date;
-    // weatherIcon.textContent = weatherIconData1;
     temp.textContent = "Temperature: " + Math.round(tempData1) + '\u00B0' +"F";
     wind.textContent = "Wind Speeds: " + windData1 + " MPH";
     humidity.textContent = "Humidity: " + humidityData1 + "%";
@@ -296,8 +276,7 @@ function renderDay2(timestamp2, weatherIconData2, tempData2, windData2, humidity
 
     day2.append(temp, wind, humidity);
 
-    dayDate.textContent = date
-    // weatherIcon.textContent = weatherIconData2;
+    dayDate.textContent = date;
     temp.textContent = "Temperature: " + Math.round(tempData2) + '\u00B0' +"F";
     wind.textContent = "Wind Speeds: " + windData2 + " MPH";
     humidity.textContent = "Humidity: " + humidityData2 + "%";
@@ -318,8 +297,7 @@ function renderDay3(timestamp3, weatherIconData3, tempData3, windData3, humidity
 
     day3.append(temp, wind, humidity);
 
-    dayDate.textContent = date
-    // weatherIcon.textContent = weatherIconData3;
+    dayDate.textContent = date;
     temp.textContent = "Temperature: " + Math.round(tempData3) + '\u00B0' +"F";
     wind.textContent = "Wind Speeds: " + windData3 + " MPH";
     humidity.textContent = "Humidity: " + humidityData3 + "%";
@@ -340,8 +318,7 @@ function renderDay4(timestamp4, weatherIconData4, tempData4, windData4, humidity
 
     day4.append(temp, wind, humidity);
 
-    dayDate.textContent = date
-    // weatherIcon.textContent = weatherIconData4;
+    dayDate.textContent = date;
     temp.textContent = "Temperature: " + Math.round(tempData4) + '\u00B0' +"F";
     wind.textContent = "Wind Speeds: " + windData4 + " MPH";
     humidity.textContent = "Humidity: " + humidityData4 + "%";
@@ -363,7 +340,6 @@ function renderDay5(timestamp5, weatherIconData5, tempData5, windData5, humidity
     day5.append(temp, wind, humidity);
 
     dayDate.textContent = date;
-    // weatherIcon.textContent = weatherIconData5;
     temp.textContent = "Temperature: " + Math.round(tempData5) + '\u00B0' +"F";
     wind.textContent = "Wind Speeds: " + windData5 + " MPH";
     humidity.textContent = "Humidity: " + humidityData5 + "%";

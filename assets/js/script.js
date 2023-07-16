@@ -70,7 +70,12 @@ function searchCity(event) {
         return;
     }
     
-
+    day1.innerHTML = " ";
+    day2.innerHTML = " ";
+    day3.innerHTML = " ";
+    day4.innerHTML = " ";
+    day5.innerHTML = " ";
+    currentCard.innerHTML = " ";
     console.log(userSearch);
 
 

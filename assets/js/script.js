@@ -92,7 +92,7 @@ function displayHistory() {
         userSearch = savedPlaces;
     }
     
-    for (i = 0; i < savedPlaces.length; i++) {
+    for (i = 0; i < userSearch.length; i++) {
         var historyDisplay = savedPlaces[i];
         var cityBtn = document.createElement("button");
         cityBtn.textContent = historyDisplay;
